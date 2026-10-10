@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liam Chavez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #0D1B2A;
+    --navy2:  #152335;
+    --gold:   #C9A84C;
+    --gold2:  #E8C96A;
+    --cream:  #F5F0E8;
+    --slate:  #8A9AB0;
+    --white:  #FDFCFA;
+    --rule:   rgba(201,168,76,0.25);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color .2s;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(21,35,53,0.9) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(201,168,76,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--gold);
+  }
+  .hero-eyebrow span {
+    font-size: 0.72rem; letter-spacing: 0.15em;
+    color: var(--gold); font-weight: 400; text-transform: uppercase;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--slate);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 2rem;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 600;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    color: var(--slate); text-transform: uppercase; margin-top: 0.3rem;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 3rem; }
+  section:not(#hero) { border-top: 1px solid var(--rule); }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-num {
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 0.75rem; display: block;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.15;
+  }
+
+  /* ── ABOUT ── */
+  #about .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5rem;
+    align-items: start;
+    max-width: 560px;
+  }
+  .about-text p {
+    color: var(--slate); line-height: 1.9;
+    margin-bottom: 1.25rem; font-size: 0.97rem;
+  }
+  .about-text p strong { color: var(--cream); font-weight: 500; }
+  .about-facts { display: flex; flex-direction: column; gap: 0; }
+  .fact-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.87rem;
+  }
+  .fact-label { color: var(--slate); }
+  .fact-val { color: var(--cream); font-weight: 400; text-align: right; }
+
+  /* ── TRAVEL ── */
+  #travel .travel-intro {
+    color: var(--slate); max-width: 540px;
+    margin-bottom: 3rem; line-height: 1.8;
+  }
+  .travel-regions { display: flex; flex-direction: column; gap: 0; }
+  .region-block {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .region-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; color: var(--cream);
+  }
+  .region-places {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .place-tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    color: var(--slate);
+    letter-spacing: 0.03em;
+  }
+  .place-tag.done { border-color: var(--gold); color: var(--gold); }
+
+  /* ── MOVIES ── */
+  #movies .movies-intro {
+    color: var(--slate); max-width: 540px;
+    margin-bottom: 3rem; line-height: 1.8;
+  }
+  .movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .movie-item {
+    background: var(--navy);
+    padding: 1.5rem 1.75rem;
+    transition: background .15s;
+    cursor: default;
+  }
+  .movie-item:hover { background: var(--navy2); }
+  .movie-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem; color: var(--cream);
+    margin-bottom: 0.35rem;
+  }
+  .movie-meta {
+    font-size: 0.72rem; color: var(--slate);
+    letter-spacing: 0.05em;
+  }
+  .movie-status {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+  .movie-status.seen { background: rgba(201,168,76,0.12); color: var(--gold); }
+  .movie-status.unseen { background: rgba(138,154,176,0.1); color: var(--slate); }
+
+  /* ── NATIONAL PARKS ── */
+  #parks .parks-intro {
+    color: var(--slate); max-width: 540px;
+    margin-bottom: 3rem; line-height: 1.8;
+  }
+  .parks-progress-bar-wrap {
+    margin-bottom: 3rem;
+  }
+  .parks-fraction {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; color: var(--cream); margin-bottom: 0.5rem;
+  }
+  .parks-fraction span { color: var(--gold); }
+  .progress-track {
+    height: 3px; background: var(--rule);
+    border-radius: 2px; overflow: hidden; margin-bottom: 0.5rem;
+  }
+  .progress-fill {
+    height: 100%; background: var(--gold);
+    border-radius: 2px;
+  }
+  .parks-label { font-size: 0.72rem; color: var(--slate); letter-spacing: 0.08em; text-transform: uppercase; }
+  .parks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+  }
+  .park-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.83rem; color: var(--slate);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+  .park-item.visited { color: var(--cream); }
+  .park-dot {
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    background: var(--rule);
+  }
+  .park-item.visited .park-dot { background: var(--gold); }
+
+  /* ── JOURNAL ── */
+  #journal .journal-note {
+    color: var(--slate); max-width: 540px;
+    margin-bottom: 3rem; line-height: 1.8; font-style: italic;
+  }
+  .journal-entries { display: flex; flex-direction: column; gap: 0; }
+  .journal-entry {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .journal-date {
+    font-size: 0.78rem; color: var(--gold);
+    letter-spacing: 0.08em; padding-top: 0.2rem;
+  }
+  .journal-body {}
+  .journal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--cream);
+    margin-bottom: 0.6rem;
+  }
+  .journal-excerpt {
+    font-size: 0.88rem; color: var(--slate);
+    line-height: 1.85; max-width: 560px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem;
+    border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem; color: var(--slate);
+  }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a {
+    font-size: 0.75rem; letter-spacing: 0.08em;
+    color: var(--slate); text-decoration: none;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { padding: 0 1.5rem 4rem; }
+    section { padding: 4rem 1.5rem; }
+    #about .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .region-block { grid-template-columns: 1fr; gap: 0.75rem; }
+    .journal-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .hero-stats { gap: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="#hero">Liam Chavez</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#travel">Travel</a></li>
+    <li><a href="#movies">Films</a></li>
+    <li><a href="#parks">Parks</a></li>
+    <li><a href="#journal">Journal</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span>Mountain Lakes, NJ · Greenpoint, Brooklyn</span>
+    </div>
+    <h1>Liam<br><em>Chavez</em></h1>
+    <p class="hero-sub">Collecting national parks, great films, and places worth going back to.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">35</div>
+        <div class="stat-label">Parks visited</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24</div>
+        <div class="stat-label">Years old</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">NYC</div>
+        <div class="stat-label">Metro area</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01 · About</span>
+    <h2>The short version</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text"></div>
+    <div class="about-facts">
+      <div class="fact-row">
+        <span class="fact-label">Hometown</span>
+        <span class="fact-val">Mountain Lakes, NJ</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-label">Education</span>
+        <span class="fact-val">Duke University</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-label">Current role</span>
+        <span class="fact-val">AE · Rilla Voice</span>
+      </div>
+      <div class="fact-row">
+        <span class="fact-label">Diet</span>
+        <span class="fact-val">Mediterranean, whole foods</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL -->
+<section id="travel">
+  <div class="section-header">
+    <span class="section-num">02 · Travel</span>
+    <h2>Places I've been</h2>
+  </div>
+  <p class="travel-intro">A running record of cities and regions worth mentioning. Gold tags are ones I'd go back to without hesitation.</p>
+  <div class="travel-regions">
+
+    <div class="region-block">
+      <div class="region-name">California &amp; Southwest</div>
+      <div class="region-places">
+        <span class="place-tag done">Los Angeles</span>
+        <span class="place-tag done">San Francisco</span>
+        <span class="place-tag done">Newport Beach</span>
+        <span class="place-tag done">Channel Islands</span>
+        <span class="place-tag done">Joshua Tree</span>
+        <span class="place-tag done">Death Valley</span>
+        <span class="place-tag done">Zion</span>
+        <span class="place-tag done">Las Vegas</span>
+        <span class="place-tag done">Sequoia</span>
+        <span class="place-tag done">Kings Canyon</span>
+        <span class="place-tag done">Yosemite</span>
+        <span class="place-tag done">Lake Tahoe</span>
+      </div>
+    </div>
+
+    <div class="region-block">
+      <div class="region-name">New York &amp; Northeast</div>
+      <div class="region-places">
+        <span class="place-tag done">New York City</span>
+        <span class="place-tag done">Brooklyn</span>
+        <span class="place-tag done">The Hamptons</span>
+        <span class="place-tag done">Long Branch NJ</span>
+        <span class="place-tag done">Boston</span>
+        <span class="place-tag done">Cambridge</span>
+        <span class="place-tag done">Acadia</span>
+      </div>
+    </div>
+
+    <div class="region-block">
+      <div class="region-name">Southeast &amp; South</div>
+      <div class="region-places">
+        <span class="place-tag done">Orlando</span>
+        <span class="place-tag done">Tampa</span>
+        <span class="place-tag done">Miami</span>
+        <span class="place-tag done">Hollywood Beach FL</span>
+        <span class="place-tag done">Nashville</span>
+        <span class="place-tag done">Great Smoky Mountains</span>
+        <span class="place-tag done">Durham NC</span>
+        <span class="place-tag done">New Orleans</span>
+        <span class="place-tag done">Big Bend TX</span>
+        <span class="place-tag done">White Sands NM</span>
+      </div>
+    </div>
+
+    <div class="region-block">
+      <div class="region-name">Midwest &amp; Plains</div>
+      <div class="region-places">
+        <span class="place-tag done">Chicago</span>
+        <span class="place-tag done">Cincinnati</span>
+        <span class="place-tag done">Badlands SD</span>
+        <span class="place-tag done">Theodore Roosevelt ND</span>
+        <span class="place-tag done">Wind Cave SD</span>
+        <span class="place-tag done">Isle Royale MI</span>
+        <span class="place-tag done">Voyageurs MN</span>
+        <span class="place-tag done">Gateway Arch MO</span>
+      </div>
+    </div>
+
+    <div class="region-block">
+      <div class="region-name">Alaska</div>
+      <div class="region-places">
+        <span class="place-tag done">Denali</span>
+        <span class="place-tag done">Kenai Fjords</span>
+        <span class="place-tag">Gates of the Arctic</span>
+        <span class="place-tag">Glacier Bay</span>
+        <span class="place-tag">Katmai</span>
+      </div>
+    </div>
+
+    <div class="region-block">
+      <div class="region-name">Next up</div>
+      <div class="region-places">
+        <span class="place-tag">Morocco</span>
+        <span class="place-tag">Portugal</span>
+        <span class="place-tag">Colombia</span>
+        <span class="place-tag">Japan</span>
+        <span class="place-tag">Argentina / Patagonia</span>
+        <span class="place-tag">USVI</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MOVIES -->
+<section id="movies">
+  <div class="section-header">
+    <span class="section-num">03 · Films</span>
+    <h2>The bucket list</h2>
+  </div>
+  <p class="movies-intro">Movies I've been meaning to watch or have already watched and would recommend. Working through it chronologically.</p>
+  <div class="movies-grid">
+
+    <div class="movie-item">
+      <div class="movie-title">The Dark Knight</div>
+      <div class="movie-meta">Christopher Nolan · 2008</div>
+      <span class="movie-status seen">Seen</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">The Dark Knight Rises</div>
+      <div class="movie-meta">Christopher Nolan · 2012</div>
+      <span class="movie-status seen">Seen</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">JFK</div>
+      <div class="movie-meta">Oliver Stone · 1991</div>
+      <span class="movie-status seen">Seen</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">Goodfellas</div>
+      <div class="movie-meta">Martin Scorsese · 1990</div>
+      <span class="movie-status unseen">On the list</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">The Godfather</div>
+      <div class="movie-meta">Francis Ford Coppola · 1972</div>
+      <span class="movie-status unseen">On the list</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">Schindler's List</div>
+      <div class="movie-meta">Steven Spielberg · 1993</div>
+      <span class="movie-status unseen">On the list</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">Interstellar</div>
+      <div class="movie-meta">Christopher Nolan · 2014</div>
+      <span class="movie-status seen">Seen</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">Inception</div>
+      <div class="movie-meta">Christopher Nolan · 2010</div>
+      <span class="movie-status seen">Seen</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">Catch Me If You Can</div>
+      <div class="movie-meta">Steven Spielberg · 2002</div>
+      <span class="movie-status unseen">On the list</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">The Wolf of Wall Street</div>
+      <div class="movie-meta">Martin Scorsese · 2013</div>
+      <span class="movie-status seen">Seen</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">No Country for Old Men</div>
+      <div class="movie-meta">Coen Brothers · 2007</div>
+      <span class="movie-status unseen">On the list</span>
+    </div>
+    <div class="movie-item">
+      <div class="movie-title">There Will Be Blood</div>
+      <div class="movie-meta">Paul Thomas Anderson · 2007</div>
+      <span class="movie-status unseen">On the list</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- NATIONAL PARKS -->
+<section id="parks">
+  <div class="section-header">
+    <span class="section-num">04 · National Parks</span>
+    <h2>All 63</h2>
+  </div>
+  <p class="parks-intro">Working through all 63 US national parks. The plan is to finish by 2030 — the ones left are mostly in Alaska and the Pacific Northwest.</p>
+  <div class="parks-progress-bar-wrap">
+    <div class="parks-fraction"><span>35</span> / 63</div>
+    <div class="progress-track">
+      <div class="progress-fill" style="width: 55.6%"></div>
+    </div>
+    <div class="parks-label">55% complete</div>
+  </div>
+  <div class="parks-grid">
+    <div class="park-item visited"><div class="park-dot"></div>Acadia</div>
+    <div class="park-item visited"><div class="park-dot"></div>Biscayne</div>
+    <div class="park-item visited"><div class="park-dot"></div>Congaree</div>
+    <div class="park-item visited"><div class="park-dot"></div>Dry Tortugas</div>
+    <div class="park-item visited"><div class="park-dot"></div>Everglades</div>
+    <div class="park-item visited"><div class="park-dot"></div>Great Smoky Mtns</div>
+    <div class="park-item visited"><div class="park-dot"></div>Hot Springs</div>
+    <div class="park-item visited"><div class="park-dot"></div>Mammoth Cave</div>
+    <div class="park-item visited"><div class="park-dot"></div>New River Gorge</div>
+    <div class="park-item visited"><div class="park-dot"></div>Shenandoah</div>
+    <div class="park-item visited"><div class="park-dot"></div>Cuyahoga Valley</div>
+    <div class="park-item visited"><div class="park-dot"></div>Gateway Arch</div>
+    <div class="park-item visited"><div class="park-dot"></div>Indiana Dunes</div>
+    <div class="park-item visited"><div class="park-dot"></div>Isle Royale</div>
+    <div class="park-item visited"><div class="park-dot"></div>Voyageurs</div>
+    <div class="park-item visited"><div class="park-dot"></div>Big Bend</div>
+    <div class="park-item visited"><div class="park-dot"></div>Carlsbad Caverns</div>
+    <div class="park-item visited"><div class="park-dot"></div>Guadalupe Mtns</div>
+    <div class="park-item visited"><div class="park-dot"></div>White Sands</div>
+    <div class="park-item visited"><div class="park-dot"></div>Badlands</div>
+    <div class="park-item visited"><div class="park-dot"></div>Theodore Roosevelt</div>
+    <div class="park-item visited"><div class="park-dot"></div>Wind Cave</div>
+    <div class="park-item visited"><div class="park-dot"></div>Zion</div>
+    <div class="park-item visited"><div class="park-dot"></div>Channel Islands</div>
+    <div class="park-item visited"><div class="park-dot"></div>Death Valley</div>
+    <div class="park-item visited"><div class="park-dot"></div>Joshua Tree</div>
+    <div class="park-item visited"><div class="park-dot"></div>Kings Canyon</div>
+    <div class="park-item visited"><div class="park-dot"></div>Lassen Volcanic</div>
+    <div class="park-item visited"><div class="park-dot"></div>Petrified Forest</div>
+    <div class="park-item visited"><div class="park-dot"></div>Pinnacles</div>
+    <div class="park-item visited"><div class="park-dot"></div>Redwood</div>
+    <div class="park-item visited"><div class="park-dot"></div>Saguaro</div>
+    <div class="park-item visited"><div class="park-dot"></div>Sequoia</div>
+    <div class="park-item visited"><div class="park-dot"></div>Yosemite</div>
+    <div class="park-item visited"><div class="park-dot"></div>Denali</div>
+    <div class="park-item"><div class="park-dot"></div>Arches</div>
+    <div class="park-item"><div class="park-dot"></div>Black Canyon</div>
+    <div class="park-item"><div class="park-dot"></div>Bryce Canyon</div>
+    <div class="park-item"><div class="park-dot"></div>Canyonlands</div>
+    <div class="park-item"><div class="park-dot"></div>Capitol Reef</div>
+    <div class="park-item"><div class="park-dot"></div>Glacier</div>
+    <div class="park-item"><div class="park-dot"></div>Grand Canyon</div>
+    <div class="park-item"><div class="park-dot"></div>Grand Teton</div>
+    <div class="park-item"><div class="park-dot"></div>Great Sand Dunes</div>
+    <div class="park-item"><div class="park-dot"></div>Mesa Verde</div>
+    <div class="park-item"><div class="park-dot"></div>Rocky Mountain</div>
+    <div class="park-item"><div class="park-dot"></div>Yellowstone</div>
+    <div class="park-item"><div class="park-dot"></div>Crater Lake</div>
+    <div class="park-item"><div class="park-dot"></div>Gates of the Arctic</div>
+    <div class="park-item"><div class="park-dot"></div>Glacier Bay</div>
+    <div class="park-item"><div class="park-dot"></div>Katmai</div>
+    <div class="park-item"><div class="park-dot"></div>Kenai Fjords</div>
+    <div class="park-item"><div class="park-dot"></div>Kobuk Valley</div>
+    <div class="park-item"><div class="park-dot"></div>Lake Clark</div>
+    <div class="park-item"><div class="park-dot"></div>Mt Rainier</div>
+    <div class="park-item"><div class="park-dot"></div>North Cascades</div>
+    <div class="park-item"><div class="park-dot"></div>Olympic</div>
+    <div class="park-item"><div class="park-dot"></div>Virgin Islands</div>
+    <div class="park-item"><div class="park-dot"></div>Wrangell-St Elias</div>
+    <div class="park-item"><div class="park-dot"></div>Great Basin</div>
+    <div class="park-item"><div class="park-dot"></div>Haleakalā</div>
+    <div class="park-item"><div class="park-dot"></div>Hawaiʻi Volcanoes</div>
+    <div class="park-item"><div class="park-dot"></div>American Samoa</div>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section id="journal">
+  <div class="section-header">
+    <span class="section-num">05 · Journal</span>
+    <h2>Notes from the road</h2>
+  </div>
+  <p class="journal-note">A place to write. Not a blog — more like a log. Adding entries as things happen worth remembering.</p>
+  <div class="journal-entries">
+
+    <div class="journal-entry">
+      <div class="journal-date">September 2026</div>
+      <div class="journal-body">
+        <div class="journal-title">California & Nevada — 11 days, 5 national parks</div>
+        <div class="journal-excerpt">Newport Beach as a base, the Channel Islands by ferry, Death Valley in September heat, Sequoia and Kings Canyon back to back, Yosemite at the end before a 6am flight home from Anaheim. The drive through Tioga Pass at dusk was the best hour of the whole trip.</div>
+      </div>
+    </div>
+
+    <div class="journal-entry">
+      <div class="journal-date">Coming soon</div>
+      <div class="journal-body">
+        <div class="journal-title">More entries to come</div>
+        <div class="journal-excerpt">This section will grow as I add it. The goal is at least one page written per month — places, thoughts, and things worth documenting before they blur together.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Liam Chavez · liamchavez.com</div>
+  <div class="footer-links">
+    <a href="mailto:liam@rilla.com">Email</a>
+    <a href="#about">About</a>
+    <a href="#parks">Parks</a>
+    <a href="#journal">Journal</a>
+  </div>
+</footer>
+
+</body>
+</html>
